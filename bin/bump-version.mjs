@@ -24,7 +24,7 @@
  */
 
 import { execSync } from 'node:child_process';
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 // ── CLI args ──────────────────────────────────────────────────────────────────
@@ -47,11 +47,18 @@ function verbose(...msg) {
 
 // ── Read package.json ─────────────────────────────────────────────────────────
 const pkgPath = resolve(process.cwd(), 'package.json');
+
+if (!existsSync(pkgPath)) {
+  // Non-JS repo (Python, Docker, etc.) — nothing to version-bump, skip silently.
+  verbose('no package.json found, skipping.');
+  process.exit(0);
+}
+
 let pkg;
 try {
   pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
-} catch {
-  console.error('❌ bump-version: package.json not found in', process.cwd());
+} catch (e) {
+  console.error('❌ bump-version: could not parse package.json:', e.message);
   process.exit(1);
 }
 

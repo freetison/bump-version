@@ -4,20 +4,20 @@ Auto-bump `package.json` version from **Conventional Commits** — zero dependen
 
 ## Why a separate package?
 
-`bump-version` runs synchronously inside `git commit`, before the commit object exists. It needs to be **fast** and **lightweight** (zero deps, only Node.js built-ins). Mixing it with AI-commit tools like `git-super` would add unnecessary startup overhead to every single commit.
+`bump-version` runs synchronously inside `git commit`. It needs to be **fast** and **lightweight** (zero deps, only Node.js built-ins). Mixing it with AI-commit tools like `git-super` would add unnecessary startup overhead to every single commit.
+
+If the repo has **no `package.json`** (Python, Docker-only, etc.) the tool exits silently with code 0 — nothing to bump.
 
 ## Install
 
 ```bash
-# per-project (recommended — ends up in node_modules/.bin)
-npm install -D @freetison/bump-version
-# or
-pnpm add -D @freetison/bump-version
+# Global (recommended — works for ALL repos, no per-repo changes needed)
+npm install -g @freetison/bump-version
 ```
 
 ```bash
-# global
-npm install -g @freetison/bump-version
+# Per-project devDep (alternative, only for JS/TS repos)
+pnpm add -D @freetison/bump-version
 ```
 
 ## Husky setup
@@ -39,6 +39,7 @@ npx lint-staged
 Skips automatically when:
 - On `BASE_BRANCH` (default: `main`)
 - No commits ahead of base branch
+- No `package.json` in current directory (non-JS repos)
 
 ## Usage
 
