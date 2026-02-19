@@ -1,0 +1,8 @@
+__tests__/
+*.md
+!README.md
+.git/
+.vscode/
+node_modules/
+coverage/
+vitest.config.mjs

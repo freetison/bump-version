@@ -1,0 +1,45 @@
+{
+  "name": "@freetison/bump-version",
+  "version": "0.1.0",
+  "description": "Auto-bump package.json version from Conventional Commits — designed for husky pre-commit hooks",
+  "author": "Angel Sola",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "bump-version": "./bin/bump-version.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "version",
+    "bump",
+    "conventional-commits",
+    "semver",
+    "husky",
+    "pre-commit",
+    "git"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.8",
+    "vitest": "^2.1.8"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/freetison/bump-version"
+  }
+}
